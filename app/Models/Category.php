@@ -18,4 +18,10 @@ class Category extends Model
     'admin_id',
     ];
 
+    public function subcategories()
+    {
+    return $this->hasMany(Subcategory::class, 'category_id', 'category_id');
+    }
+
+
 }

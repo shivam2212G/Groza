@@ -95,6 +95,11 @@
                         <span class="sub-item">Sub Category</span>
                       </a>
               </li>
+              <li class="nav-item">
+                      <a href="{{ route('products.index') }}">
+                        <span class="sub-item">Product</span>
+                      </a>
+              </li>
 
             </ul>
           </div>
