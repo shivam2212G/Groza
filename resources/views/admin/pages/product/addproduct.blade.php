@@ -12,6 +12,11 @@
     </div>
 
     <div class="mb-3">
+        <label>Product Price</label>
+        <input type="text" name="product_price" class="form-control">
+    </div>
+
+    <div class="mb-3">
         <label>Product Image</label>
         <input type="file" name="product_image" class="form-control">
     </div>
@@ -21,16 +26,22 @@
         <textarea name="product_description" class="form-control"></textarea>
     </div>
 
+
     <select name="subcategory_id" class="form-control" required>
     <option value="">-- Select --</option>
     @foreach ($category_subs->groupBy('category_name') as $categoryName => $grouped)
         <optgroup label="{{ $categoryName }}">
             @foreach ($grouped as $sub)
-                <option value="{{ $sub->subcategory_id }}">{{ $sub->subcategory_name }}</option>
+                @if ($sub->subcategory_id)
+                    <option value="{{ $sub->subcategory_id }}">{{ $sub->subcategory_name }}</option>
+                @else
+                    <option disabled>No Subcategories</option>
+                @endif
             @endforeach
         </optgroup>
     @endforeach
-    </select>
+</select>
+
 
     <button type="submit" class="btn btn-success">Add Product</button>
 </form>

@@ -11,6 +11,7 @@
             <th>Name</th>
             <th>Image</th>
             <th>Description</th>
+            <th>Price</th>
             <th>Category</th>
             <th>Subcategory</th>
             <th>Action</th>
@@ -27,6 +28,7 @@
                 @endif
             </td>
             <td>{{ $p->product_description }}</td>
+            <td>{{ $p->product_price }}</td>
             <td>{{ $p->category_name }}</td>
             <td>{{ $p->subcategory_name }}</td>
             <td>

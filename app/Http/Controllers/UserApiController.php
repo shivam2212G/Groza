@@ -55,6 +55,7 @@ class UserApiController extends Controller
             'products.product_name',
             'products.product_image',
             'products.product_description',
+            'products.product_price',
             'categories.category_name',
             'subcategories.subcategory_name'
         )

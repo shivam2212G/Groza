@@ -13,6 +13,12 @@
     </div>
 
     <div class="mb-3">
+        <label>Product Price</label>
+        <input type="text" name="product_price" value="{{ $product->product_price }}" class="form-control" required>
+    </div>
+
+
+    <div class="mb-3">
         <label>Current Image</label><br>
         @if ($product->product_image)
             <img src="{{ asset('storage/' . $product->product_image) }}" width="100">

@@ -28,15 +28,16 @@ class ProductController extends Controller
 
     public function create()
     {
-        $category_subs = DB::table('subcategories')
-    ->join('categories', 'subcategories.category_id', '=', 'categories.category_id')
+        $category_subs = DB::table('categories')
+    ->leftJoin('subcategories', 'categories.category_id', '=', 'subcategories.category_id')
     ->select(
-        'subcategories.subcategory_id',
-        'subcategories.subcategory_name',
         'categories.category_id',
-        'categories.category_name'
+        'categories.category_name',
+        'subcategories.subcategory_id',
+        'subcategories.subcategory_name'
     )
     ->get();
+
 
     return view('admin.pages.product.addproduct', compact('category_subs'));
 
@@ -48,7 +49,8 @@ class ProductController extends Controller
         'product_name' => 'required',
         'product_image' => 'nullable|image',
         'product_description' => 'nullable',
-        'subcategory_id' => 'required'
+        'subcategory_id' => 'required',
+        'product_price' => 'required',
     ]);
 
     $imagePath = null;
@@ -63,6 +65,7 @@ class ProductController extends Controller
 
     Product::create([
         'product_name' => $request->product_name,
+        'product_price' => $request->product_price,
         'product_image' => $imagePath,
         'product_description' => $request->product_description,
         'subcategory_id' => $subcategory->subcategory_id,
@@ -89,7 +92,8 @@ class ProductController extends Controller
         'product_name' => 'required',
         'product_image' => 'nullable|image',
         'product_description' => 'nullable',
-        'subcategory_id' => 'required'
+        'subcategory_id' => 'required',
+        'product_price' => 'required',
     ]);
 
     if ($request->hasFile('product_image')) {
@@ -108,6 +112,7 @@ class ProductController extends Controller
         'product_description' => $request->product_description,
         'subcategory_id' => $subcategory->subcategory_id,
         'category_id' => $subcategory->category_id,
+        'product_price' => $request->product_price,
     ]);
 
     return redirect()->route('products.index')->with('success', 'Product updated successfully.');
