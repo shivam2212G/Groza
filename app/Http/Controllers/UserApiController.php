@@ -68,4 +68,60 @@ class UserApiController extends Controller
         ]);
     }
 
+    public function searchProducts(Request $request)
+{
+    $query = $request->input('query');
+
+    $products = DB::table('products')
+        ->join('categories', 'products.category_id', '=', 'categories.category_id')
+        ->join('subcategories', 'products.subcategory_id', '=', 'subcategories.subcategory_id')
+        ->select(
+            'products.*',
+            'categories.category_name',
+            'subcategories.subcategory_name'
+        )
+        ->where('products.product_name', 'like', "%$query%")
+        ->orWhere('categories.category_name', 'like', "%$query%")
+        ->orWhere('subcategories.subcategory_name', 'like', "%$query%")
+        ->get();
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Search results',
+        'data' => $products
+    ]);
+}
+
+
+//    public function searchProducts(Request $request)
+// {
+//     $search = $request->query('q'); // Search term from query string
+
+//     $products = DB::table('products')
+//         ->join('categories', 'products.category_id', '=', 'categories.category_id')
+//         ->join('subcategories', 'products.subcategory_id', '=', 'subcategories.subcategory_id')
+//         ->select(
+//             'products.product_id',
+//             'products.product_name',
+//             'products.product_image',
+//             'products.product_description',
+//             'categories.category_id',
+//             'categories.category_name',
+//             'subcategories.subcategory_id',
+//             'subcategories.subcategory_name'
+//         )
+//         ->where('products.product_name', 'like', "%{$search}%")
+//         ->orWhere('products.product_description', 'like', "%{$search}%")
+//         ->orWhere('categories.category_name', 'like', "%{$search}%")
+//         ->orWhere('subcategories.subcategory_name', 'like', "%{$search}%")
+//         ->get();
+
+//     return response()->json([
+//         'status' => true,
+//         'message' => 'Search Results',
+//         'data' => $products
+//     ]);
+// }
+
+
 }
