@@ -51,7 +51,7 @@ public function login(Request $request)
         'password' => 'required',
     ]);
 
-    $admin = \App\Models\Admin::where('email', $request->email)->first();
+    $admin = Admin::where('email', $request->email)->first();
 
     if ($admin && Hash::check($request->password, $admin->password)) {
         // Store admin ID in session

@@ -35,7 +35,7 @@ class SubcategoryController extends Controller
     {
         $request->validate([
             'subcategory_name' => 'required',
-            'subcategory_description' => 'nullable',
+            'subcategory_description' => 'required',
             'category_id' => 'required|exists:categories,category_id',
         ]);
 
@@ -59,7 +59,7 @@ class SubcategoryController extends Controller
 
         $request->validate([
             'subcategory_name' => 'required',
-            'subcategory_description' => 'nullable',
+            'subcategory_description' => 'required',
             'category_id' => 'required|exists:categories,category_id',
         ]);
 

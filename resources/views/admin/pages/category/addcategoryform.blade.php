@@ -13,7 +13,7 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="category_name" class="form-label fw-bold">Category Name</label>
+                        <label for="category_name" class="form-label fw-bold">Category Name <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-tag"></i></span>
                             <input type="text"
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="category_image" class="form-label fw-bold">Category Image</label>
+                        <label for="category_image" class="form-label fw-bold">Category Image <span class="text-danger">*</span></label>
                         <input type="file"
                                class="form-control"
                                id="category_image"
@@ -49,12 +49,16 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="category_description" class="form-label fw-bold">Description</label>
+                    <label for="category_description" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
                     <textarea class="form-control"
                               id="category_description"
                               name="category_description"
                               rows="3"
-                              placeholder="Enter category description..."></textarea>
+                              placeholder="Enter category description..."
+                              required></textarea>
+                    <div class="invalid-feedback">
+                        Please provide a category description.
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
@@ -88,6 +92,9 @@
     }
     .input-group-text {
         background-color: #f8f9fa;
+    }
+    .text-danger {
+        color: #dc3545;
     }
 </style>
 @endpush

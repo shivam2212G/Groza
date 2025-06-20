@@ -11,9 +11,10 @@
             <form action="{{ route('subcategories.update', $subcategory->subcategory_id) }}" method="POST" class="needs-validation" novalidate>
                 @csrf
 
+
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <label for="subcategory_name" class="form-label fw-bold">Subcategory Name</label>
+                        <label for="subcategory_name" class="form-label fw-bold">Subcategory Name <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-tag"></i></span>
                             <input type="text"
@@ -29,7 +30,7 @@
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="category_id" class="form-label fw-bold">Parent Category</label>
+                        <label for="category_id" class="form-label fw-bold">Parent Category <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-list"></i></span>
                             <select class="form-select"
@@ -52,12 +53,16 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="subcategory_description" class="form-label fw-bold">Description</label>
+                    <label for="subcategory_description" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
                     <textarea class="form-control"
                               id="subcategory_description"
                               name="subcategory_description"
                               rows="3"
-                              placeholder="Enter subcategory description...">{{ old('subcategory_description', $subcategory->subcategory_description) }}</textarea>
+                              placeholder="Enter subcategory description..."
+                              required>{{ old('subcategory_description', $subcategory->subcategory_description) }}</textarea>
+                    <div class="invalid-feedback">
+                        Please provide a subcategory description.
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
@@ -103,6 +108,9 @@
     .btn-outline-secondary:hover {
         background-color: #6c757d;
         color: white;
+    }
+    .text-danger {
+        color: #dc3545;
     }
 </style>
 @endpush

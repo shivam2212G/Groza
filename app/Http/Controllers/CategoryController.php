@@ -25,7 +25,7 @@ class CategoryController extends Controller
     $request->validate([
         'category_name' => 'required|string|max:255',
         'category_image' => 'required|image',
-        'category_description' => 'nullable|string',
+        'category_description' => 'required|string',
     ]);
 
     // Handle image upload
@@ -56,7 +56,7 @@ public function update(Request $request, $id)
     $request->validate([
         'category_name' => 'required|string|max:255',
         'category_image' => 'nullable|image|mimes:jpg,jpeg,png',
-        'category_description' => 'nullable|string',
+        'category_description' => 'required|string',
     ]);
 
     // If new image uploaded

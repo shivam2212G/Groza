@@ -13,7 +13,7 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <label for="subcategory_name" class="form-label fw-bold">Subcategory Name</label>
+                        <label for="subcategory_name" class="form-label fw-bold">Subcategory Name <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-tag"></i></span>
                             <input type="text"
@@ -21,6 +21,7 @@
                                    id="subcategory_name"
                                    name="subcategory_name"
                                    placeholder="e.g. Organic Fruits"
+                                   value="{{ old('subcategory_name') }}"
                                    required>
                             <div class="invalid-feedback">
                                 Please provide a subcategory name.
@@ -29,7 +30,7 @@
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="category_id" class="form-label fw-bold">Parent Category</label>
+                        <label for="category_id" class="form-label fw-bold">Parent Category <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-list"></i></span>
                             <select class="form-select"
@@ -51,12 +52,16 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="subcategory_description" class="form-label fw-bold">Description</label>
+                    <label for="subcategory_description" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
                     <textarea class="form-control"
                               id="subcategory_description"
                               name="subcategory_description"
                               rows="3"
-                              placeholder="Enter subcategory description...">{{ old('subcategory_description') }}</textarea>
+                              placeholder="Enter subcategory description..."
+                              required>{{ old('subcategory_description') }}</textarea>
+                    <div class="invalid-feedback">
+                        Please provide a subcategory description.
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
@@ -98,6 +103,9 @@
     .btn-success:hover {
         background-color: #157347;
         border-color: #146c43;
+    }
+    .text-danger {
+        color: #dc3545;
     }
 </style>
 @endpush

@@ -11,9 +11,10 @@
             <form action="{{ route('categories.update', $category->category_id) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 @csrf
 
+
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <label for="category_name" class="form-label fw-bold">Category Name</label>
+                        <label for="category_name" class="form-label fw-bold">Category Name <span class="text-danger">*</span></label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-tag"></i></span>
                             <input type="text"
@@ -62,11 +63,15 @@
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="category_description" class="form-label fw-bold">Description</label>
+                        <label for="category_description" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
                         <textarea class="form-control"
                                   id="category_description"
                                   name="category_description"
-                                  rows="3">{{ old('category_description', $category->category_description) }}</textarea>
+                                  rows="3"
+                                  required>{{ old('category_description', $category->category_description) }}</textarea>
+                        <div class="invalid-feedback">
+                            Please provide a category description.
+                        </div>
                     </div>
                 </div>
 
@@ -104,6 +109,9 @@
     }
     .img-thumbnail {
         border-radius: 8px;
+    }
+    .text-danger {
+        color: #dc3545;
     }
 </style>
 @endpush

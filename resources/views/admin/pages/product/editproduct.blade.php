@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="mb-3">
-                            <label for="product_name" class="form-label fw-bold">Product Name</label>
+                            <label for="product_name" class="form-label fw-bold">Product Name <span class="text-danger">*</span></label>
                             <input type="text" name="product_name" value="{{ old('product_name', $product->product_name) }}"
                                    class="form-control border-primary" id="product_name" required>
                             <div class="invalid-feedback">
@@ -31,15 +31,18 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="product_description" class="form-label fw-bold">Description</label>
+                            <label for="product_description" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
                             <textarea name="product_description" class="form-control border-primary"
-                                      id="product_description" rows="3">{{ old('product_description', $product->product_description) }}</textarea>
+                                      id="product_description" rows="3" required>{{ old('product_description', $product->product_description) }}</textarea>
+                            <div class="invalid-feedback">
+                                Please provide a product description.
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label for="product_price" class="form-label fw-bold">Price (₹)</label>
+                            <label for="product_price" class="form-label fw-bold">Price (₹) <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text bg-primary text-white">₹</span>
                                 <input type="number" step="0.01" name="product_price"
@@ -74,6 +77,10 @@
                             <input type="file" name="product_image" class="form-control border-primary"
                                    id="product_image" accept="image/*">
                             <small class="text-muted">Leave blank to keep current image</small>
+                            <div class="mt-2">
+                                <img id="imagePreview" src="#" alt="New Image Preview"
+                                     class="img-thumbnail d-none" style="max-width: 150px; max-height: 150px;">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -81,7 +88,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="subcategory_id" class="form-label fw-bold">Category → Subcategory</label>
+                            <label for="subcategory_id" class="form-label fw-bold">Category → Subcategory <span class="text-danger">*</span></label>
                             <select name="subcategory_id" class="form-select border-primary" id="subcategory_id" required>
                                 <option value="" disabled>-- Select Category --</option>
                                 @foreach($categories as $category)
@@ -123,10 +130,8 @@
 (function () {
   'use strict'
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
 
-  // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
       form.addEventListener('submit', function (event) {
@@ -139,5 +144,23 @@
       }, false)
     })
 })()
+
+// Image preview functionality
+function previewImage(event) {
+    const preview = document.getElementById('imagePreview');
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function() {
+        preview.src = reader.result;
+        preview.classList.remove('d-none');
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}
+
+document.getElementById('product_image').addEventListener('change', previewImage);
 </script>
 @endpush
