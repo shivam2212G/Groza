@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\GoogleAuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
@@ -51,4 +52,14 @@ Route::get('user/products/{category_id}/{subcategory_id}', [UserApiController::c
 Route::get('user/products/search', [UserApiController::class, 'searchProducts']);
 // http://127.0.0.1:8000/api/user/products/search?q=milk
 
+
+//User Register
+Route::post('/register', [AuthController::class, 'register']);
+//method POST
+// http://127.0.0.1:8000/api/register
+
+//User Login
+Route::post('/login', [AuthController::class, 'login']);
+//method POST
+// http://127.0.0.1:8000/api/login
 
