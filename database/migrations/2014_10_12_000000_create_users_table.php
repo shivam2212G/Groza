@@ -14,12 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-           $table->id();
-           $table->string('name');
-           $table->string('number')->unique();
-           $table->string('email')->unique();
-           $table->string('password');
-           $table->timestamps();
+          $table->id();
+            $table->string('name');
+            $table->string('email')->unique()->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password')->nullable(); // Nullable for Google login users
+            $table->string('google_id')->nullable()->unique(); // Stores Google's user ID
+            $table->string('avatar')->nullable(); // Stores profile image URL from Google
+            $table->rememberToken();
+            $table->timestamps();
         });
 
     }

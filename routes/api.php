@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\UserApiController;
@@ -53,13 +55,29 @@ Route::get('user/products/search', [UserApiController::class, 'searchProducts'])
 // http://127.0.0.1:8000/api/user/products/search?q=milk
 
 
-//User Register
+
 Route::post('/register', [AuthController::class, 'register']);
-//method POST
 // http://127.0.0.1:8000/api/register
 
-//User Login
 Route::post('/login', [AuthController::class, 'login']);
-//method POST
 // http://127.0.0.1:8000/api/login
 
+
+// Google Auth Routes
+// Route::post('/auth/google', [AuthController::class, 'handleGoogleAuth']);
+
+
+
+Route::post('/cart/add', [CartController::class, 'addToCart']);
+Route::post('/cart/remove', [CartController::class, 'removeFromCart']);
+// http://127.0.0.8000/api/cart/remove
+
+
+Route::get('/cart/{userId}', [CartController::class, 'getCartItems']);
+// http://127.0.0.8000/api/cart/1
+
+Route::post('/checkout', [CheckoutController::class, 'store']);
+// http://127.0.0.8000/api/checkout
+
+Route::get('/checkout/history/{userId}', [CheckoutController::class, 'index']);
+// http://127.0.0.8000/api/checkout/history/1
