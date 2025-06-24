@@ -187,7 +187,7 @@
                                         </li>
                                         <li>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{ route('admin.profile',['id'=>$admin->admin_id]) }}">
                                                 <i class="fas fa-user me-2"></i> My Profile
                                             </a>
                                             <a class="dropdown-item" href="#">
